@@ -4,7 +4,7 @@
 </script>
 
 <div class="w-full bg-black px-4">
-	<aside
+	<div
 		class="flex items-center justify-between bg-black md:flex-row-reverse xl:pl-60 2xl:mx-auto 2xl:max-w-[1300px] 2xl:pl-4"
 	>
 		<ModeToggle />
@@ -16,5 +16,5 @@
 			<TopbarText class="max-md:hidden">Fria returer</TopbarText>
 			<TopbarText class="max-md:hidden">Öppet köp i 14 dagar</TopbarText>
 		</div>
-	</aside>
+	</div>
 </div>

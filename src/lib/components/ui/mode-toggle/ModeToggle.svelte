@@ -10,11 +10,21 @@
 	import { Moon, Sun } from 'lucide-svelte/icons';
 	import { mode, toggleMode } from 'mode-watcher';
 
+	const checked = $derived($mode === 'dark');
 	const currentMode = $derived(
 		$mode === 'light'
 			? 'Change the theme to dark mode'
 			: 'Change the theme to light mode',
 	);
+
+	function handleKeyboardEvent(
+		e: KeyboardEvent & {
+			currentTarget: EventTarget & HTMLButtonElement;
+		},
+	) {
+		if (e.key !== 'Enter' && e.key !== ' ') return;
+		toggleMode();
+	}
 </script>
 
 <TooltipProvider>
@@ -27,14 +37,15 @@
 						onclick={toggleMode}
 						class={cn(
 							'size-4 cursor-pointer text-white transition-opacity',
-							$mode === 'dark' && 'opacity-60',
+							checked && 'opacity-60',
 						)}
 					/>
 
 					<Switch
-						aria-label={currentMode}
+						{checked}
 						controlledChecked
-						checked={$mode === 'dark'}
+						onkeydown={(e) => handleKeyboardEvent(e)}
+						aria-label={currentMode}
 						class="w-8"
 						{...props}
 					/>
@@ -44,7 +55,7 @@
 						onclick={toggleMode}
 						class={cn(
 							'size-4 cursor-pointer text-white transition-opacity',
-							$mode === 'light' && 'opacity-60',
+							!checked && 'opacity-60',
 						)}
 					/>
 				</span>
