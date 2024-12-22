@@ -1,15 +1,15 @@
 <script lang="ts">
-	import { Button } from '$components/ui/button';
+	import { Switch } from '$components/ui/switch';
 	import {
 		Tooltip,
 		TooltipContent,
 		TooltipProvider,
 		TooltipTrigger,
 	} from '$components/ui/tooltip';
+	import { cn } from '$utils';
 	import { Moon, Sun } from 'lucide-svelte/icons';
 	import { mode, toggleMode } from 'mode-watcher';
 
-	const Icon = $derived($mode === 'light' ? Sun : Moon);
 	const currentMode = $derived(
 		$mode === 'light'
 			? 'Change the theme to dark mode'
@@ -20,20 +20,37 @@
 <TooltipProvider>
 	<Tooltip>
 		<TooltipTrigger onclick={toggleMode}>
-			{#snippet child(props)}
-				<Button
-					variant="outline"
-					size="icon"
-					aria-label={currentMode}
-					{...props}
-				>
-					<Icon
+			{#snippet child({ props })}
+				<span class="inline-flex h-8 w-fit items-center space-x-2">
+					<Sun
 						aria-hidden
-						class="size-5 transition-all dark:-rotate-90"
+						onclick={toggleMode}
+						class={cn(
+							'size-4 cursor-pointer text-white transition-opacity',
+							$mode === 'dark' && 'opacity-60',
+						)}
 					/>
-				</Button>
+
+					<Switch
+						aria-label={currentMode}
+						controlledChecked
+						checked={$mode === 'dark'}
+						class="w-8"
+						{...props}
+					/>
+
+					<Moon
+						aria-hidden
+						onclick={toggleMode}
+						class={cn(
+							'size-4 cursor-pointer text-white transition-opacity',
+							$mode === 'light' && 'opacity-60',
+						)}
+					/>
+				</span>
 			{/snippet}
 		</TooltipTrigger>
+
 		<TooltipContent>
 			<p>{currentMode}</p>
 		</TooltipContent>

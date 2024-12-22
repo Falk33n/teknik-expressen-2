@@ -1,3 +1,4 @@
 import Topbar from './Topbar.svelte';
+import TopbarText from './TopbarText.svelte';
 
-export { Topbar };
+export { Topbar, TopbarText };

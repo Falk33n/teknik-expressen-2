@@ -5,7 +5,7 @@
 	let {
 		ref = $bindable(null),
 		class: className,
-		sideOffset = 4,
+		sideOffset = 20,
 		...restProps
 	}: TooltipContentProps = $props();
 </script>
