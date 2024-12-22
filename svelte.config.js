@@ -11,8 +11,8 @@ const config = {
 			$lib: 'src/lib',
 			$components: 'src/lib/components',
 			$hooks: 'src/lib/hooks',
-			$utils: 'src/lib/utils'
-		}
-	}
+			$utils: 'src/lib/utils',
+		},
+	},
 };
 export default config;
